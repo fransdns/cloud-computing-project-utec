@@ -1,0 +1,15 @@
+#backend
+/backend/node_modules/
+
+
+#no incluir IaC
+/iac/
+
+#otros archivos importantes
+**/.env
+**/TODO.txt
+
+#no incluir archivos de fronted de reactjs
+/chat-app/node_modules/
+/chat-app/.gitignore
+/chat-app/README.md
