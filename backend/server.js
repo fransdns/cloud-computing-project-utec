@@ -2,14 +2,21 @@ import express from 'express';
 import pool from './database.js';
 import checkUserType from './middleware.js';
 import cors from 'cors';
+import createTable from './database-migration.js';
 
 const app = express();
 const port = 3001;
 
+//middlewares
 app.use(express.json());
 app.use(cors());
 
-app.get('/connected', async (req, res) => {
+//creación de tablas y el indice
+createTable();
+
+//rutas
+
+/*app.get('/connected', async (req, res) => {
   try {
     const client = await pool.connect();
     const result = await client.query('SELECT NOW() as current_time');
@@ -86,11 +93,17 @@ app.delete('/usuarios/:id', async (req, res) => {
 app.get('/', (req, res) => {
   res.send('hola, estás en el root')
 });
+*/
 
 
 app.get('/messages', async (req, res) => {
+  const { name, number } = req.query;
+
   try {
-    const result = await pool.query('SELECT * FROM messages ORDER BY timestamp ASC');
+    const result = await pool.query(
+      'SELECT * FROM messages WHERE name = $1 AND number = $2 ORDER BY timestamp ASC',
+      [name, number]
+    );
     res.json(result.rows);
   } catch (err) {
     console.error(err);
@@ -98,12 +111,14 @@ app.get('/messages', async (req, res) => {
   }
 });
 
+
 app.post('/messages', async (req, res) => {
-  const { text, sender } = req.body;
+  const { name, number, text, sender } = req.body;
+
   try {
     const result = await pool.query(
-      'INSERT INTO messages (text, sender, timestamp) VALUES ($1, $2, $3) RETURNING *',
-      [text, sender, new Date()]
+      'INSERT INTO messages (name, number, text, sender, timestamp) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      [name, number, text, sender, new Date()]
     );
     res.json(result.rows[0]);
   } catch (err) {
@@ -116,6 +131,7 @@ app.post('/messages', async (req, res) => {
 app.get('*', (req, res) => {
   res.status(404).send('Página no encontrada');
 });
+
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);

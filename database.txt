@@ -1,0 +1,10 @@
+CREATE TABLE chats (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    number VARCHAR(255),
+    sender VARCHAR(255),
+    message TEXT,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_chats_name_number ON chats (name, number);
