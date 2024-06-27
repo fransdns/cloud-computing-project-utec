@@ -3,6 +3,7 @@ import pool from './database.js';
 import checkUserType from './middleware.js';
 import cors from 'cors';
 import createTable from './database-migration.js';
+import { dirname } from 'path';
 
 const app = express();
 const port = 443;
@@ -10,6 +11,10 @@ const port = 443;
 //middlewares
 app.use(express.json());
 app.use(cors());
+
+// Obtener __dirname en ES6
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 //creación de tablas y el indice
 createTable();
