@@ -24,7 +24,7 @@ const Landing = ({ onFormSubmit }) => {
 
     // Enviar datos al backend
     try {
-      const response = await fetch('https://dnspoison.lol/messages', {
+      const response = await fetch('https://dnspoison.lol/whatchat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -33,13 +33,15 @@ const Landing = ({ onFormSubmit }) => {
       });
 
       if (response.ok) {
-        alert('Datos enviados exitosamente');
+        const data = await response.json(); // Asumimos que el backend responde con JSON
+        console.log(data); // Puedes hacer algo con los datos recibidos aquí
         onFormSubmit(); // Llamar a la función pasada como prop para cambiar de vista
       } else {
-        alert('Error al enviar los datos');
+        const errorData = await response.text();
+        setError(`Error del servidor: ${errorData}`);
       }
     } catch (error) {
-      alert('Error de red: ' + error.message);
+      setError(`Error de red: ${error.message}`);
     }
   };
 
