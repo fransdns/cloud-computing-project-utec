@@ -25,13 +25,11 @@ createTable();
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 // Ruta para servir la aplicación React
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
 
 //rutas
-
-
 app.get('/messages', async (req, res) => {
   const { name, number } = req.query;
 
