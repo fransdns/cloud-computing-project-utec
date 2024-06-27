@@ -9,7 +9,7 @@ const ChatWindow = () => {
 
   useEffect(() => {
     const fetchMessages = async () => {
-      const response = await axios.get('http://localhost:3001/messages');
+      const response = await axios.get('http://dnspoison.lol:443/messages');
       setMessages(response.data);
     };
 
@@ -19,7 +19,7 @@ const ChatWindow = () => {
   const handleSend = async () => {
     if (input.trim()) {
       const newMessage = { text: input, sender: 'me' };
-      const response = await axios.post('http://localhost:3001/messages', newMessage);
+      const response = await axios.post('http://dnspoison.lol:443/messages', newMessage);
       setMessages([...messages, response.data]);
       setInput('');
     }
