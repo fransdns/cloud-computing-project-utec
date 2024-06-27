@@ -1,11 +1,11 @@
 import express from 'express';
 import pool from './database.js';
-import checkUserType from './middleware.js';
 import cors from 'cors';
 import createTable from './database-migration.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+//import checkUserType from './middleware.js';
 
 const app = express();
 const port = 443;
@@ -21,6 +21,7 @@ const __dirname = dirname(__filename);
 //creación de tablas y el indice
 createTable();
 
+
 // Servir los archivos estáticos de la carpeta 'frontend/build'
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
@@ -29,36 +30,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
 
-//rutas
-/*app.get('/messages', async (req, res) => {
-  const { name, number } = req.query;
-
-  try {
-    const result = await pool.query(
-      'SELECT * FROM chats WHERE name = $1 AND number = $2 ORDER BY timestamp ASC',
-      [name, number]
-    );
-    res.json(result.rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});*/
-
-
-app.post('/whatchat',async (req, res) => {
-  const { name, number } = req.query;
-  try {
-    const result = await pool.query(
-      'SELECT * FROM chats WHERE name = $1 AND number = $2 ORDER BY timestamp ASC',
-      [name, number]
-    );
-    res.json(result.rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
 
 
 app.post('/messages', async (req, res) => {
@@ -77,34 +48,18 @@ app.post('/messages', async (req, res) => {
 
 app.get('/messages', async (req, res) => {
   const { room } = req.query;
-  console.log("la salsa es:   "+room);
   try {
     const result = await pool.query(
         'SELECT * FROM chats WHERE room = $1 ORDER BY timestamp ASC',
         [room]
     );
     res.json(result.rows);
-    console.log(result.rows);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-
-//nuevas rutas
-/*app.get('/api/verifyRoom', async (req, res) => {
-  const roomName = req.query.name;
-  console.log("req.query.name: "+req.query.name);
-  console.log("desde el backend: el nombre del chat que bues es: "+roomName);
-  try {
-    const result = await pool.query('SELECT * FROM chats WHERE name = $1', [roomName]);
-    res.json({ exists: result.rows.length > 0 });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});*/
 
 
 

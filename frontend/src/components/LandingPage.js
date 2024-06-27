@@ -11,11 +11,7 @@ function LandingPage() {
     setLoading(true);
 
     try {
-      // Realizar petición al backend para verificar la existencia de la sala
-      //const response = await axios.get(`http://localhost:443/api/verifyRoom?name=${roomName}`);
-
       window.location.href = `/chat?room=${roomName}`;
-      console.log("La sala de chat existe");
     }
       catch (error) {
       console.error('Error al verificar la sala de chat:', error);
