@@ -35,7 +35,7 @@ app.get('/messages', async (req, res) => {
 
   try {
     const result = await pool.query(
-      'SELECT * FROM messages WHERE name = $1 AND number = $2 ORDER BY timestamp ASC',
+      'SELECT * FROM chats WHERE name = $1 AND number = $2 ORDER BY timestamp ASC',
       [name, number]
     );
     res.json(result.rows);
@@ -51,7 +51,7 @@ app.post('/messages', async (req, res) => {
 
   try {
     const result = await pool.query(
-      'INSERT INTO messages (name, number, text, sender, timestamp) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      'INSERT INTO chats (name, number, text, sender, timestamp) VALUES ($1, $2, $3, $4, $5) RETURNING *',
       [name, number, text, sender, new Date()]
     );
     res.json(result.rows[0]);
