@@ -3,6 +3,8 @@ import pool from './database.js';
 import checkUserType from './middleware.js';
 import cors from 'cors';
 import createTable from './database-migration.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
 const app = express();
