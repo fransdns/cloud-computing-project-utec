@@ -6,7 +6,7 @@ const Landing = ({ onFormSubmit }) => {
   const [number, setNumber] = useState('');
   const [error, setError] = useState('');
 
-  const validateAndSubmit = async (e) => {
+  const validateAndSubmit = (e) => {
     e.preventDefault();
 
     // Validación de los campos
@@ -23,26 +23,7 @@ const Landing = ({ onFormSubmit }) => {
     setError('');
 
     // Enviar datos al backend
-    try {
-      const response = await fetch('https://dnspoison.lol/whatchat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ name, number })
-      });
-
-      if (response.ok) {
-        const data = await response.json(); // Asumimos que el backend responde con JSON
-        console.log(data); // Puedes hacer algo con los datos recibidos aquí
-        onFormSubmit(); // Llamar a la función pasada como prop para cambiar de vista
-      } else {
-        const errorData = await response.text();
-        setError(`Error del servidor: ${errorData}`);
-      }
-    } catch (error) {
-      setError(`Error de red: ${error.message}`);
-    }
+    onFormSubmit({ name, number });
   };
 
   return (
