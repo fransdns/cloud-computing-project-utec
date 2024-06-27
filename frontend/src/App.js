@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ChatWindow from './components/ChatWindow';
+import ChatWindow from './components/chat-windows';
 import Landing from './components/landing';
 import './App.css';
 
