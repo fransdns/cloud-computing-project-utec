@@ -51,7 +51,7 @@ app.post('/messages', async (req, res) => {
 
   try {
     const result = await pool.query(
-      'INSERT INTO chats (name, number, text, sender, timestamp) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      'INSERT INTO chats (name, number, message, sender, timestamp) VALUES ($1, $2, $3, $4, $5) RETURNING *',
       [name, number, text, sender, new Date()]
     );
     res.json(result.rows[0]);
