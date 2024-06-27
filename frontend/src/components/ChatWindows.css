@@ -1,0 +1,116 @@
+/* ChatWindow.css */
+
+.chat-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  overflow-y: auto; /* Permite hacer scroll vertical si hay muchos mensajes */
+  height: 70vh; /* Altura máxima para el contenedor de mensajes */
+}
+
+.message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message-item {
+  align-self: flex-end; /* Alinea todos los mensajes a la derecha */
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 12px;
+  padding: 10px 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 70%;
+  word-wrap: break-word; /* Rompe palabras largas */
+  margin-bottom: 8px; /* Espacio entre mensajes */
+}
+
+.message-item.self {
+  align-self: flex-end; /* Alinea los mensajes propios a la derecha */
+  background-color: #6c757d; /* Color de fondo para los propios */
+}
+
+
+/*TODO: Aquí está el estilo del casillero del input en sí*/
+.message-input {
+  position: fixed; /* Mantiene el casillero de entrada fijo en la pantalla */
+  bottom: 20px; /* Distancia desde la parte inferior */
+  margin-top: 20px;
+  left: 50%; /* Centrado horizontal */
+  transform: translateX(-50%); /* Ajuste para centrar correctamente */
+  display: flex; /* Utiliza flexbox para el diseño */
+  align-items: center; /* Centra verticalmente los elementos */
+  justify-content: space-between; /* Espacio entre elementos flexibles */
+  width: 80%; /* Ancho del casillero */
+  max-width: 600px; /* Ancho máximo del casillero */
+  background-color: #fff; /* Color de fondo */
+  border: 1px solid #ccc; /* Borde sólido */
+  border-radius: 20px; /* Bordes redondeados */
+  padding: 10px 20px; /* Espaciado interno */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+
+button {
+  background-color: #007bff; /* Color de fondo */
+  color: #fff; /* Color del texto */
+  border: none; /* Sin borde */
+  border-radius: 20px; /* Bordes redondeados */
+  padding: 10px 20px; /* Espaciado interno */
+  font-size: 16px; /* Tamaño de fuente */
+  cursor: pointer; /* Cambia el cursor al pasar el ratón */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+  margin-left: 50%;
+  margin-right: 10%; /* Espacio a la derecha */
+}
+
+
+button:hover {
+  background-color: #0056b3; /* Cambia el color de fondo al pasar el ratón */
+}
+
+
+.send-button:hover {
+  background-color: #0056b3;
+}
+
+h1 {
+  text-align: center; /* Centrar el texto */
+  color: #333; /* Color del texto */
+  font-size: 2.5rem; /* Tamaño de la fuente */
+  margin-top: 20px; /* Margen superior */
+  margin-bottom: 20px; /* Margen inferior */
+  font-family: 'Arial', sans-serif; /* Familia de fuentes */
+}
+
+#mensaje {
+  border: 1px solid #ccc; /* Borde sólido de color gris */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 10px; /* Espaciado interno */
+  background-color: #f0f0f0; /* Color de fondo */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  max-width: 300px; /* Ancho máximo del div */
+  margin: 20px auto; /* Margen automático para centrarlo */
+  text-align: right; /* Alineación del texto a la derecha */
+}
+
+#mensaje p {
+  margin: 0; /* Elimina el margen por defecto de los párrafos */
+}
+
+#input-user {
+  width: 600px; /* Ajusta el ancho del input según tus necesidades */
+  padding: 10px; /* Añade espacio interno para mejorar el aspecto */
+  font-size: 16px; /* Tamaño de la fuente */
+  border: 1px solid #ccc; /* Borde del input */
+  border-radius: 5px; /* Bordes redondeados */
+  box-sizing: border-box;
+}
+
+
+

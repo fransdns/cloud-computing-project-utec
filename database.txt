@@ -8,3 +8,11 @@ CREATE TABLE chats (
 );
 
 CREATE INDEX idx_chats_name_number ON chats (name, number);
+
+CREATE TABLE chats (
+    id SERIAL PRIMARY KEY,
+    room VARCHAR(255),
+    message TEXT,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+

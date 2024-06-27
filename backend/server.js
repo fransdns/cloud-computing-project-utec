@@ -30,9 +30,24 @@ app.get('/', (req, res) => {
 });
 
 //rutas
-app.get('/messages', async (req, res) => {
+/*app.get('/messages', async (req, res) => {
   const { name, number } = req.query;
 
+  try {
+    const result = await pool.query(
+      'SELECT * FROM chats WHERE name = $1 AND number = $2 ORDER BY timestamp ASC',
+      [name, number]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});*/
+
+
+app.post('/whatchat',async (req, res) => {
+  const { name, number } = req.query;
   try {
     const result = await pool.query(
       'SELECT * FROM chats WHERE name = $1 AND number = $2 ORDER BY timestamp ASC',
@@ -47,12 +62,11 @@ app.get('/messages', async (req, res) => {
 
 
 app.post('/messages', async (req, res) => {
-  const { name, number, text, sender } = req.body;
-
+  const {room, message} = req.body;
   try {
     const result = await pool.query(
-      'INSERT INTO chats (name, number, message, sender, timestamp) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [name, number, text, sender, new Date()]
+      'INSERT INTO chats (room, message, timestamp) VALUES ($1, $2,$3) RETURNING *',
+      [room, message, new Date()]
     );
     res.json(result.rows[0]);
   } catch (err) {
@@ -60,6 +74,38 @@ app.post('/messages', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+app.get('/messages', async (req, res) => {
+  const { room } = req.query;
+  console.log("la salsa es:   "+room);
+  try {
+    const result = await pool.query(
+        'SELECT * FROM chats WHERE room = $1 ORDER BY timestamp ASC',
+        [room]
+    );
+    res.json(result.rows);
+    console.log(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+//nuevas rutas
+/*app.get('/api/verifyRoom', async (req, res) => {
+  const roomName = req.query.name;
+  console.log("req.query.name: "+req.query.name);
+  console.log("desde el backend: el nombre del chat que bues es: "+roomName);
+  try {
+    const result = await pool.query('SELECT * FROM chats WHERE name = $1', [roomName]);
+    res.json({ exists: result.rows.length > 0 });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});*/
+
 
 
 app.get('*', (req, res) => {

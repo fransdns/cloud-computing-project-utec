@@ -1,0 +1,10 @@
+sudo apt update
+sudo apt install git -y
+sudo apt install nodejs -y
+sudo apt install npm -y
+
+git clone https://github.com/fransdns/cloud-computing-project-utec.git
+
+npm start
+
+pfcloudutecstack-myrdsinstance48fd439c-mlrj5rntsjs5.c5ao8ossk3f6.us-east-1.rds.amazonaws.com
