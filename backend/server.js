@@ -14,6 +14,14 @@ app.use(cors());
 //creación de tablas y el indice
 createTable();
 
+// Servir los archivos estáticos de la carpeta 'frontend/build'
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+// Ruta para servir la aplicación React
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+});
+
 //rutas
 
 /*app.get('/connected', async (req, res) => {
