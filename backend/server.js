@@ -5,7 +5,6 @@ import createTable from './database-migration.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-//import checkUserType from './middleware.js';
 
 const app = express();
 const port = 443;
@@ -25,14 +24,8 @@ createTable();
 // Servir los archivos estáticos de la carpeta 'frontend/build'
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-// Ruta para servir la aplicación React
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
-});
 
-
-
-app.post('/messages', async (req, res) => {
+app.post('/api/messages', async (req, res) => {
   const {room, message} = req.body;
   try {
     const result = await pool.query(
@@ -46,7 +39,7 @@ app.post('/messages', async (req, res) => {
   }
 });
 
-app.get('/messages', async (req, res) => {
+app.get('/api/messages', async (req, res) => {
   const { room } = req.query;
   try {
     const result = await pool.query(
@@ -60,11 +53,23 @@ app.get('/messages', async (req, res) => {
   }
 });
 
-
-
+app.get('/api/chat', async (req, res) => {
+  const { room } = req.query;
+  console.log("el parametro room es: ", room);
+  try {
+    const result = await pool.query(
+        'SELECT * FROM chats WHERE room = $1 ORDER BY timestamp ASC',
+        [room]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 app.get('*', (req, res) => {
-  res.status(404).send('Página no encontrada');
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
 
 

@@ -9,7 +9,7 @@ function ChatWindow() {
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);
 
-  const RUTAGET = `http://localhost:443/messages?room=${roomName}`;
+  const RUTAGET = `http://localhost:443/api/messages?room=${roomName}`;
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -39,7 +39,7 @@ function ChatWindow() {
 
     try {
       // Enviar el nuevo mensaje al backend
-      await axios.post("http://localhost:443/messages", {
+      await axios.post("http://localhost:443/api/messages", {
         room: roomName,
         message: newMessage.trim()
       });
@@ -59,7 +59,6 @@ function ChatWindow() {
   const handleInputChange = (event) => {
     setNewMessage(event.target.value);
   };
-  //TODO: 2._Para tener una barra que me permita ver los mensajes anteriores, qué cosa debería de cambiar?
   return (
       <div>
         <h1>Chat Room: {roomName}</h1>
@@ -91,4 +90,3 @@ function ChatWindow() {
 }
 
 export default ChatWindow;
-
