@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Para hacer peticiones HTTP, asegúrate de instalar axios en tu proyecto
 import './LandingPage.css';
 
 function LandingPage() {
   const [roomName, setRoomName] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  //TODO: debes de enviar el roomName al backend correctamente.
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
 
     try {
-      window.location.href = `/chat`;
+      window.location.href = `/chat?room=${roomName}`;
     }
       catch (error) {
       console.error('Error al verificar la sala de chat:', error);

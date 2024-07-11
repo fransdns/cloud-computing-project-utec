@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      POSTGRES_HOST: db  # Nombre del servicio del contenedor de la base de datos
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      - ./backend:/app  # Monta el código fuente del backend en el contenedor
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    environment:
+      NODE_ENV: production
+      REACT_APP_API_URL: http://backend:3000  # URL del backend
+    volumes:
+      - ./frontend:/app  # Monta el código fuente del frontend en el contenedor
+
+  db:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
+    driver: local
+
+networks:
+  default:
+    driver: bridge

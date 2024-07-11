@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+//import { useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import axios from 'axios'; // Asegúrate de tener axios instalado en tu proyecto
 import './ChatWindows.css';
+
+
 function ChatWindow() {
-  const location = useLocation();
-  const roomName = new URLSearchParams(location.search).get('room');
+  //const location = useLocation();
+  const [searchParams] = useSearchParams();
+  const roomName = searchParams.get('room');
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);

@@ -8,7 +8,7 @@
 #otros archivos importantes
 **/.env
 **/TODO.txt
-
+**/client_logs.txt
 #no incluir archivos de fronted de reactjs
 /frontend/node_modules/
 /frontend/.gitignore
