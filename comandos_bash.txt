@@ -8,3 +8,7 @@ git clone https://github.com/fransdns/cloud-computing-project-utec.git
 npm start
 
 pfcloudutecstack-myrdsinstance48fd439c-mlrj5rntsjs5.c5ao8ossk3f6.us-east-1.rds.amazonaws.com
+
+docker run -d -p 5432:5432 --name mypostgres-container -v pgdata:/var/lib/postgresql/data mypostgres
+docker run -d -p 5432:5432 --name mypostgres-container -v pgdata:/var/lib/postgresql/data mypostgres
+docker run --env-file *.env -d -p 5432:5432 --name mypostgres-container -v pgdata:/var/lib/postgresql/data mypostgres

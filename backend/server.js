@@ -9,9 +9,13 @@ import fs from 'fs';
 
 import useragent from 'express-useragent';
 import requestIp from 'request-ip';
+import dotenv from "dotenv";
+
 
 const app = express();
-const port = 443;
+const port = process.env.BACKEND_PORT || 3000;
+
+dotenv.config();
 
 //middlewares
 app.use(express.json());

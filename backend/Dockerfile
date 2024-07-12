@@ -9,7 +9,7 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 443
+EXPOSE 3000
 
 # Comando para correr la aplicación
 CMD ["node", "server.js"]
