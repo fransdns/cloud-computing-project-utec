@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import axios from 'axios'; // Asegúrate de tener axios instalado en tu proyecto
 import './ChatWindows.css';
 
-
+const port_backend = 3000;
 function ChatWindow() {
   //const location = useLocation();
   const [searchParams] = useSearchParams();
@@ -13,7 +13,7 @@ function ChatWindow() {
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);
 
-  const RUTAGET = `http://localhost:443/api/messages?room=${roomName}`;
+  const RUTAGET = `http://localhost:${port_backend}/api/messages?room=${roomName}`;
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -43,7 +43,7 @@ function ChatWindow() {
 
     try {
       // Enviar el nuevo mensaje al backend
-      await axios.post("http://localhost:443/api/messages", {
+      await axios.post(`http://localhost:${port_backend}/api/messages`, {
         room: roomName,
         message: newMessage.trim()
       });

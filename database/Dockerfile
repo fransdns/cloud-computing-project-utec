@@ -1,9 +1,17 @@
 # Usa la imagen oficial de PostgreSQL como base
-FROM postgres:16
+FROM postgres:latest
 
-# Copia un script SQL de inicialización (opcional)
-# COPY init.sql /docker-entrypoint-initdb.d/
+# Copia el archivo de inicialización SQL en el directorio de inicialización de PostgreSQL
+COPY init.sql /docker-entrypoint-initdb.d/
 
-# Expone el puerto 5432
-EXPOSE 6432
+# Copia el archivo .env al contenedor
+COPY .env /app/.env
+
+# Configura el contenedor para que use las variables de entorno del archivo .env
+ENV POSTGRES_USER=${POSTGRES_USER}
+ENV POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+ENV POSTGRES_DB=${POSTGRES_DB}
+
+# Exponer el puerto por defecto de PostgreSQL
+EXPOSE 5432
 

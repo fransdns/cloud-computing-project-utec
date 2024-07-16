@@ -6,9 +6,9 @@ const {Client} = pkg;
 
 const client = new Client({
     host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
+    user: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
+    database: process.env.POSTGRES_DB,
     port: process.env.DB_PORT,
   });
 
@@ -27,14 +27,14 @@ const client = new Client({
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
       `;
-      /*await client.query(createTableQuery);
+      await client.query(createTableQuery);
       console.log('Tabla de chats creada (si no existía) con éxito');
 
       const createIndexQuery = `
         CREATE INDEX IF NOT EXISTS idx_chats_room ON chats (room);
       `;
       await client.query(createIndexQuery);
-      console.log('Índice idx_chats_name_number creado (si no existía) con éxito');*/
+      console.log('Índice idx_chats_name_number creado (si no existía) con éxito');
   
     } catch (err) {
       console.error('Error al conectar o crear la tabla/índice:', err);
@@ -42,6 +42,7 @@ const client = new Client({
       // Cierra la conexión
       await client.end();
       console.log('Conexión cerrada');
+
     }
   }
 

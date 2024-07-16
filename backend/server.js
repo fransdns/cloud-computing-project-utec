@@ -53,7 +53,7 @@ app.use((req, res, next) => {
 });
 
 // Servir los archivos estáticos de la carpeta 'frontend/build'
-app.use(express.static(path.join(__dirname, '../frontend/build')));
+//app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 app.post('/api/messages', async (req, res) => {
   const { room, message } = req.body;
@@ -98,9 +98,10 @@ app.get('/api/chat', async (req, res) => {
   }
 });
 
-app.get('*', (req, res) => {
+/*app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
+*/
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
