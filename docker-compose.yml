@@ -1,6 +1,6 @@
 services:
   db:
-    image: database-cloud
+    image: dnspoison/database-cloud
     container_name: postgres_container
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -12,7 +12,7 @@ services:
       - "5432:5432"
 
   backend:
-    image: backend-cloud
+    image: dnspoison/backend-cloud
     container_name: backend_container
     depends_on:
       - db
@@ -26,7 +26,7 @@ services:
       - "3000:3000"
 
   frontend:
-    image: front-nginx-cloud
+    image: dnspoison/front-nginx-cloud
     container_name: frontend_container
     depends_on:
       - backend
