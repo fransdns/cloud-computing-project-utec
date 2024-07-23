@@ -4,15 +4,17 @@
 
 ## 📋 Instrucciones para Ejecutar la Aplicación
 
-1. 🐳 **Instalar Docker y bajar las imágenes.**
+1. 🐳 **Instalar Docker y construir las imagenes.**
 ## 🐳 Docker Containers
 
-Este proyecto utiliza tres imágenes Docker, cada una con su propio Dockerfile en las siguientes carpetas:
+Este proyecto utiliza tres imágenes Docker, cada una con su propio Dockerfile en las siguientes carpetas: Debes entrar a cada una y construir la imagen con:
+```bash
+    docker build -t <nombre_de_la_iamgen> .
+```
 
 - **Frontend**
 - **Backend**
 - **Database**
-
 2. 📂 **Ir a la ruta donde se encuentra el archivo `docker-compose.yml`.**
 3. 💻 **Ejecutar el siguiente comando en la terminal:**
     ```bash
