@@ -9,7 +9,7 @@
 
 Este proyecto utiliza tres imágenes Docker, cada una con su propio Dockerfile en las siguientes carpetas: Debes entrar a cada una y construir la imagen con:
 ```bash
-    docker build -t <nombre_de_la_iamgen> .
+    docker build -t <nombre_de_la_imagen> .
 ```
 
 - **Frontend**
