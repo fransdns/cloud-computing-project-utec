@@ -42,8 +42,6 @@ Esto iniciará el despliegue de la infraestructura.
 
 ## 🌟 Escalabilidad con CDK
 
-Para escalar aplicaciones usando AWS CDK, podemos usar CDK para crear un autoscaling group para los servidores EC2 [CDK for auto scaling group](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_autoscaling-readme.html).
-
+Para escalar aplicaciones, podemos usar CDK para crear un autoscaling group para los servidores EC2 [CDK for auto scaling group](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_autoscaling-readme.html). Esto creará un grupo de autoescalado con ciertas reglas para que automáticamente escale horizontalmente la aplicación.
 ---
 
-Espero que este formato te sea útil. ¡Déjame saber si necesitas algún ajuste adicional!
